@@ -3,7 +3,7 @@ version: '3'
 services:
 
   server:
-    image: 'allanmsouza/motionsense:server'
+    image: 'allanmsouza/motionsense:fl_server'
     container_name: fl_server
     environment:
       - SERVER_IP=0.0.0.0:9999
@@ -18,7 +18,7 @@ services:
       replicas: 1
       placement:
         constraints:
-          - node.labels.type==manager
+          - node.role==manager
 
   client-0:
     image: 'allanmsouza/motionsense:fl_client'
