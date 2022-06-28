@@ -42,9 +42,10 @@ observe = async () => {
         for (const [index, containerInfo] of containerInfos.entries()) {
             if (!updatedContainerInfosIds.includes(containerInfo.ID)) {
                 const currentTime = new Date().toISOString();
+		const timestamp   =  Date.parse(currentTime)/1000;
                 const targetDir = `Reports/${EXPERIMENT_NAME}/${containerInfo.image}`;
                 fs.mkdirSync(targetDir, { recursive: true });
-                fs.writeFileSync(`${targetDir}/${currentTime}-${containerInfo.host}`, JSON.stringify(containerInfo.stats));
+                fs.writeFileSync(`${targetDir}/${timestamp}-${containerInfo.host}`, JSON.stringify(containerInfo.stats));
                 containerInfos.splice(index, 1);
             }
         }
