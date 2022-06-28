@@ -2,11 +2,11 @@ const dockerService = require('./docker-service');
 fs = require('fs');
 
 
-const WORKER_01       = process.env.WORKER_01.toString();
-const WORKER_02       = process.env.WORKER_02.toString();
-const WORKER_03       = process.env.WORKER_03.toString();
-const MANAGER         = process.env.MANAGER.toString();
-const EXPERIMENT_NAME = process.env.EXPERIMENT_NAME.toString();
+const WORKER_01       = '192.168.56.100' //process.env.WORKER_01.toString();
+const WORKER_02       = '192.168.56.101' //process.env.WORKER_02.toString();
+const WORKER_03       = '192.168.56.102' //process.env.WORKER_03.toString();
+const MANAGER         = '192.168.56.103' //process.env.MANAGER.toString();
+const EXPERIMENT_NAME = 'NormalFL'//process.env.EXPERIMENT_NAME.toString();
 
 const NODES = [WORKER_01, WORKER_02, WORKER_03, MANAGER];
 
@@ -42,7 +42,7 @@ observe = async () => {
         for (const [index, containerInfo] of containerInfos.entries()) {
             if (!updatedContainerInfosIds.includes(containerInfo.ID)) {
                 const currentTime = new Date().toISOString();
-                const targetDir = `/Reports/${EXPERIMENT_NAME}/${containerInfo.image}`;
+                const targetDir = `Reports/${EXPERIMENT_NAME}/${containerInfo.image}`;
                 fs.mkdirSync(targetDir, { recursive: true });
                 fs.writeFileSync(`${targetDir}/${currentTime}-${containerInfo.host}`, JSON.stringify(containerInfo.stats));
                 containerInfos.splice(index, 1);
