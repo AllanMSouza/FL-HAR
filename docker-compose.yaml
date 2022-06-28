@@ -1,0 +1,95 @@
+version: '3'
+
+services:
+
+  server:
+    image: 'allanmsouza/motionsense:server'
+    container_name: fl_server
+    environment:
+      - SERVER_IP=0.0.0.0:9999
+      - FRACTION_FIT=0.1
+      - MIN_FIT_CLIENTS=3
+      - MIN_AVAILABLE_CLIENTS=3
+      - NUM_ROUNDS=5
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.type==manager
+
+  client-0:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=None
+      - BATCH_SIZE=32
+      - NON_IID=1
+      - USER_ID=1
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  client-1:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=None
+      - BATCH_SIZE=32
+      - NON_IID=1
+      - USER_ID=11
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  client-2:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=None
+      - BATCH_SIZE=32
+      - NON_IID=1
+      - USER_ID=3
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  observer:
+    image: 'allanmsouza/motionsense:fl_observer'
+    environment:
+      - EXPERIMENT_NAME=NormalFL
+      - WORKER_01=192.168.56.100
+      - WORKER_02=192.168.56.101
+      - WORKER_03=192.168.56.102
+      - MANAGER=192.168.56.103
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==manager
+
+

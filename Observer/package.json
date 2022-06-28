@@ -1,0 +1,24 @@
+{
+  "name": "observability",
+  "version": "1.0.0",
+  "description": "",
+  "main": "observer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gen-doc": "jsdoc src/docker-handler.js --destination ./docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/remde/federated-learning.git"
+  },
+  "author": "remde",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/remde/federated-learning/issues"
+  },
+  "homepage": "https://github.com/remde/federated-learning#readme",
+  "dependencies": {
+    "axios": "^0.26.0",
+    "jsdoc": "^3.6.10"
+  }
+}
