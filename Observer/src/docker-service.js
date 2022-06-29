@@ -27,7 +27,7 @@ exports.getAllContainersInfosWithStats = async (nodes, port) => {
     const containerInfos = await this.getAllContainersInfos(nodes, port);
     for (const containerInfo of containerInfos) {
         const stats = await this.getContainerStats(containerInfo.host, containerInfo.ID);
-        if (containerInfo.image === 'server') {
+        if (containerInfo.image === 'fl_server') {
             const accuracy = await this.getServerAccuracy(containerInfo.ID, containerInfo.host);
             if (accuracy >= 0) {
                 stats.accuracy = accuracy;
