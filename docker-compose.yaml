@@ -8,8 +8,9 @@ services:
     environment:
       - SERVER_IP=0.0.0.0:9999
       - FRACTION_FIT=0.1
-      - MIN_FIT_CLIENTS=10
-      - MIN_AVAILABLE_CLIENTS=10
+      - MIN_FIT_CLIENTS=24
+      - MIN_EVAL_CLIENTS=24
+      - MIN_AVAILABLE_CLIENTS=24
       - NUM_ROUNDS=10
     networks:
       - default
@@ -20,32 +21,15 @@ services:
         constraints:
           - node.role==manager
 
-  client-0:
-    image: 'allanmsouza/motionsense:fl_client'
-    environment:
-      - SERVER_IP=fl_server:9999
-      - COMPRESSION_METHOD=None
-      - BATCH_SIZE=32
-      - NON_IID=0
-      - USER_ID=1
-      
-    networks:
-      - default
-    restart: always
-    deploy:
-      replicas: 1
-      placement:
-        constraints:
-          - node.role==worker
-
   client-1:
     image: 'allanmsouza/motionsense:fl_client'
     environment:
       - SERVER_IP=fl_server:9999
-      - COMPRESSION_METHOD=None
+      - COMPRESSION_METHOD=SSGD
       - BATCH_SIZE=32
       - NON_IID=0
-      - USER_ID=11
+      - USER_ID=1
+      - USER_SAMPLE=0.2
       
     networks:
       - default
@@ -60,29 +44,11 @@ services:
     image: 'allanmsouza/motionsense:fl_client'
     environment:
       - SERVER_IP=fl_server:9999
-      - COMPRESSION_METHOD=None
+      - COMPRESSION_METHOD=SSGD
       - BATCH_SIZE=32
       - NON_IID=0
-      - USER_ID=3
-      
-    networks:
-      - default
-    restart: always
-    deploy:
-      replicas: 1
-      placement:
-        constraints:
-          - node.role==worker
-
-
-  client-2:
-    image: 'allanmsouza/motionsense:fl_client'
-    environment:
-      - SERVER_IP=fl_server:9999
-      - COMPRESSION_METHOD=None
-      - BATCH_SIZE=32
-      - NON_IID=0
-      - USER_ID=3
+      - USER_ID=2
+      - USER_SAMPLE=0.2
       
     networks:
       - default
@@ -97,10 +63,11 @@ services:
     image: 'allanmsouza/motionsense:fl_client'
     environment:
       - SERVER_IP=fl_server:9999
-      - COMPRESSION_METHOD=None
+      - COMPRESSION_METHOD=SSGD
       - BATCH_SIZE=32
       - NON_IID=0
       - USER_ID=3
+      - USER_SAMPLE=0.2
       
     networks:
       - default
@@ -115,10 +82,11 @@ services:
     image: 'allanmsouza/motionsense:fl_client'
     environment:
       - SERVER_IP=fl_server:9999
-      - COMPRESSION_METHOD=None
+      - COMPRESSION_METHOD=SSGD
       - BATCH_SIZE=32
       - NON_IID=0
-      - USER_ID=3
+      - USER_ID=4
+      - USER_SAMPLE=0.2
       
     networks:
       - default
@@ -133,10 +101,11 @@ services:
     image: 'allanmsouza/motionsense:fl_client'
     environment:
       - SERVER_IP=fl_server:9999
-      - COMPRESSION_METHOD=None
+      - COMPRESSION_METHOD=SSGD
       - BATCH_SIZE=32
       - NON_IID=0
-      - USER_ID=3
+      - USER_ID=5
+      - USER_SAMPLE=0.2
       
     networks:
       - default
@@ -152,10 +121,11 @@ services:
     image: 'allanmsouza/motionsense:fl_client'
     environment:
       - SERVER_IP=fl_server:9999
-      - COMPRESSION_METHOD=None
+      - COMPRESSION_METHOD=SSGD
       - BATCH_SIZE=32
       - NON_IID=0
-      - USER_ID=3
+      - USER_ID=6
+      - USER_SAMPLE=0.2
       
     networks:
       - default
@@ -170,10 +140,11 @@ services:
     image: 'allanmsouza/motionsense:fl_client'
     environment:
       - SERVER_IP=fl_server:9999
-      - COMPRESSION_METHOD=None
+      - COMPRESSION_METHOD=SSGD
       - BATCH_SIZE=32
       - NON_IID=0
-      - USER_ID=3
+      - USER_ID=7
+      - USER_SAMPLE=0.2
       
     networks:
       - default
@@ -188,10 +159,11 @@ services:
     image: 'allanmsouza/motionsense:fl_client'
     environment:
       - SERVER_IP=fl_server:9999
-      - COMPRESSION_METHOD=None
+      - COMPRESSION_METHOD=SSGD
       - BATCH_SIZE=32
       - NON_IID=0
-      - USER_ID=3
+      - USER_ID=8
+      - USER_SAMPLE=0.2
       
     networks:
       - default
@@ -206,10 +178,298 @@ services:
     image: 'allanmsouza/motionsense:fl_client'
     environment:
       - SERVER_IP=fl_server:9999
-      - COMPRESSION_METHOD=None
+      - COMPRESSION_METHOD=SSGD
       - BATCH_SIZE=32
       - NON_IID=0
-      - USER_ID=3
+      - USER_ID=9
+      - USER_SAMPLE=0.2
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  client-10:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=SSGD
+      - BATCH_SIZE=32
+      - NON_IID=0
+      - USER_ID=10
+      - USER_SAMPLE=0.2
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  client-11:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=SSGD
+      - BATCH_SIZE=32
+      - NON_IID=0
+      - USER_ID=11
+      - USER_SAMPLE=0.2
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  client-12:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=SSGD
+      - BATCH_SIZE=32
+      - NON_IID=0
+      - USER_ID=12
+      - USER_SAMPLE=0.2
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  client-13:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=SSGD
+      - BATCH_SIZE=32
+      - NON_IID=0
+      - USER_ID=13
+      - USER_SAMPLE=0.2
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  client-14:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=SSGD
+      - BATCH_SIZE=32
+      - NON_IID=0
+      - USER_ID=14
+      - USER_SAMPLE=0.2
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  client-15:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=SSGD
+      - BATCH_SIZE=32
+      - NON_IID=0
+      - USER_ID=15
+      - USER_SAMPLE=0.2
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  client-16:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=SSGD
+      - BATCH_SIZE=32
+      - NON_IID=0
+      - USER_ID=16
+      - USER_SAMPLE=0.2
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  client-17:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=SSGD
+      - BATCH_SIZE=32
+      - NON_IID=0
+      - USER_ID=17
+      - USER_SAMPLE=0.2
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  client-18:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=SSGD
+      - BATCH_SIZE=32
+      - NON_IID=0
+      - USER_ID=18
+      - USER_SAMPLE=0.2
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  client-19:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=SSGD
+      - BATCH_SIZE=32
+      - NON_IID=0
+      - USER_ID=19
+      - USER_SAMPLE=0.2
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  client-20:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=SSGD
+      - BATCH_SIZE=32
+      - NON_IID=0
+      - USER_ID=20
+      - USER_SAMPLE=0.2
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  client-21:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=SSGD
+      - BATCH_SIZE=32
+      - NON_IID=0
+      - USER_ID=21
+      - USER_SAMPLE=0.2
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+  client-22:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=SSGD
+      - BATCH_SIZE=32
+      - NON_IID=0
+      - USER_ID=22
+      - USER_SAMPLE=0.2
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+
+  client-23:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=SSGD
+      - BATCH_SIZE=32
+      - NON_IID=0
+      - USER_ID=23
+      - USER_SAMPLE=0.2
+      
+    networks:
+      - default
+    restart: always
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role==worker
+
+
+  client-24:
+    image: 'allanmsouza/motionsense:fl_client'
+    environment:
+      - SERVER_IP=fl_server:9999
+      - COMPRESSION_METHOD=SSGD
+      - BATCH_SIZE=32
+      - NON_IID=0
+      - USER_ID=24
+      - USER_SAMPLE=0.2
       
     networks:
       - default

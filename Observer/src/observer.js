@@ -2,13 +2,14 @@ const dockerService = require('./docker-service');
 fs = require('fs');
 
 
-const WORKER_01       = '192.168.56.100' //process.env.WORKER_01.toString();
-const WORKER_02       = '192.168.56.101' //process.env.WORKER_02.toString();
-const WORKER_03       = '192.168.56.102' //process.env.WORKER_03.toString();
-const MANAGER         = '192.168.56.103' //process.env.MANAGER.toString();
-const EXPERIMENT_NAME = 'NormalFL'//process.env.EXPERIMENT_NAME.toString();
+const WORKER_01       = '192.168.56.104'; //process.env.WORKER_01.toString();
+const WORKER_02       = '192.168.56.105'; //process.env.WORKER_02.toString();
+const WORKER_03       = '192.168.56.106';
+const WORKER_04       = '192.168.56.107'; //process.env.WORKER_03.toString();
+const MANAGER         = '192.168.56.108'; //process.env.MANAGER.toString();
+const EXPERIMENT_NAME = 'SSGD';//process.env.EXPERIMENT_NAME.toString();
 
-const NODES = [WORKER_01, WORKER_02, WORKER_03, MANAGER];
+const NODES = [WORKER_01, WORKER_02, WORKER_03, WORKER_04, MANAGER];
 
 
 observe = async () => {
