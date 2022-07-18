@@ -45,6 +45,9 @@ def load_data(file):
     
     train_loader  = DataLoader(train_set, batch_size=int(os.environ['BATCH_SIZE']), shuffle=True)
     test_loader   = DataLoader(test_set, batch_size=int(os.environ['BATCH_SIZE']), shuffle=False)
+
+    # train_loader  = DataLoader(train_set, batch_size=32, shuffle=True)
+    # test_loader   = DataLoader(test_set, batch_size=32, shuffle=False)
     
     num_samples = {'trainset' : len(train_set), 'testset' : len(test_set)}
     
@@ -60,6 +63,11 @@ class MotionSenseDataset(Dataset):
         if int(os.environ['NON_IID']) == 1:
         	user    = int(os.environ['USER_ID'])
         	dataset = dataset[dataset['subject'] == user]
+
+        else:
+            dataset = dataset.sample(frac=float(os.environ['USER_SAMPLE']))
+
+        # dataset = dataset.sample(frac=0.2)
 
         activity = dataset['activity'].values
         activity = LabelEncoder().fit_transform(activity)
